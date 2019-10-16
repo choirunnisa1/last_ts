@@ -1,7 +1,11 @@
 package com.choirunnisa.anemialase;
 
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -10,4 +14,50 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
     }
+
+    public void toMateri(View view) {
+        Intent materiIntent = new Intent(MainActivity.this, MateriActivity.class);
+        startActivity(materiIntent);
+    }
+
+    public void toQuiz(View view){
+        Intent moveIntent = new Intent(MainActivity.this, KuisActivity.class);
+        startActivity(moveIntent);
+    }
+
+    public void toHelp(View view){
+        Intent bantuanIntent = new Intent(MainActivity.this, BantuanActivity.class);
+        startActivity(bantuanIntent);
+    }
+
+    public void toAbout(View view){
+        Intent tentangIntent = new Intent(MainActivity.this, TentangActivity.class);
+        startActivity(tentangIntent);
+    }
+
+    @Override
+    public void onBackPressed(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(false);
+        builder.setMessage("Yakin keluar aplikasi?")
+                .setPositiveButton("YA", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        finish();
+                        System.exit(0);
+                    }
+                });
+        builder.setNegativeButton("TIDAK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //if user select "No", just cancel this dialog and continue with app
+                dialog.cancel();
+            }
+        });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
 }
+
+
+
